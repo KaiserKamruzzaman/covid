@@ -45,7 +45,7 @@
 
 <!-- modal start -->
 <div class="modal" tabindex="-1" role="dialog" id="country_modal">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" id="country_modal_content">
     <!--   <div class="modal-header">
         <h5 class="modal-title">Modal title</h5>
@@ -167,14 +167,13 @@
 
 	function covidChart(country_data,date)
 	{
-		// var demo=[12, 19, 3, 5, 2, 3];
 		var ctx = document.getElementById('myChart').getContext('2d');
 		var myChart = new Chart(ctx, {
 		    type: 'bar',
 		    data: {
 		        labels: date,
 		        datasets: [{
-		            label: '# of Infections',
+		            label: 'Number of Infections',
 		            data: country_data,
 		            backgroundColor: [
 		                'rgba(255, 99, 132, 0.2)',

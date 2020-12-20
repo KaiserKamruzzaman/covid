@@ -20,7 +20,7 @@
 
 		$output='
 			<div class="modal-header">
-			  <h5 class="modal-title">'.$result[0]['country'].' Covid Information</h5>
+			  <h5 class="modal-title text-success">'.$result[0]['country'].' Covid Information</h5>
 			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			    <span aria-hidden="true">&times;</span>
 			  </button>

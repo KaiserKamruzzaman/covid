@@ -61,6 +61,22 @@
 			return $row;
 			
 		}
+		// info for a specific country
+		public function countryInfo($id)
+		{
+			$sql="SELECT * FROM `covid_data` WHERE `id`='$id' ";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+			$row=$stmt->fetch();
+			return $row;
+		}
+
+		public function countryInfoUpdate($id,$total_case,$new_case,$total_death,$new_death)
+		{
+			$sql="UPDATE `covid_data` SET `total_case`='$total_case',`new_case`='$new_case',`total_death`='$total_death',`new_death`='$new_death' WHERE id='$id' ";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+		}
 
 
 
