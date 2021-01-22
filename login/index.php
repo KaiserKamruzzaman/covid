@@ -7,7 +7,19 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<?php include'../assets/navbar.php' ?>
+
+<!-- nabvar portion -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <a class="navbar-brand" href="../index.php">Logo</a>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="index.php">Login</a>
+    </li>
+  </ul>
+</nav>
+<br><br><br>
+<!-- nabvar portion end -->
+
 <body>
   <div class="wrapper fadeInDown">
   <div id="formContent">

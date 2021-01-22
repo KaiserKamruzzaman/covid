@@ -26,7 +26,9 @@
 	   foreach($data as $d){
 	   		$object->uploadCsv($d);
 	   }
-	   // echo "<script>alert('Import done');</script>";
+	   header("Location: index.php"); 
+	   // echo "<script>alert('CSV file upload done...');</script>";
+	   exit();
 	  }
 	 }
 	}

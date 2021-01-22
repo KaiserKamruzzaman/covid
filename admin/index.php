@@ -10,7 +10,7 @@
    ?>
  </head> 
 
- <?php include'../assets/navbar.php' ?>
+
 
  <!-- modal start -->
  <div class="modal" tabindex="-1" role="dialog" id="country_modal">
@@ -33,6 +33,21 @@
    </div>
  </div>
  <!-- modal end -->
+
+ <!-- nabvar portion -->
+ <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+   <a class="navbar-brand" href="../index.php">Logo</a>
+   <ul class="navbar-nav">
+     <li class="nav-item">
+       <a class="nav-link" href="business_org.php">Business Org</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link" href="../login/index.php">Login</a>
+     </li>
+   </ul>
+ </nav>
+ <br><br><br>
+ <!-- nabvar portion end -->
 
  <body>  
   <div class="container">
@@ -144,7 +159,7 @@
       data:$('#country_info_edit').serialize(),
       success:function(data)
       {
-        alert('data');
+        alert('Data Updated Successfully!!!');
         location.reload();
         // $('#country_modal').modal('hide');
       }
