@@ -78,6 +78,40 @@
 			$stmt->execute();
 		}
 
+		// add organization
+		public function add_org($org_name,$org_location)
+		{
+			$sql = "INSERT INTO `organizations`(`name`, `location`) VALUES ('$org_name', '$org_location')";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+		}
+		// show organizations
+		public function show_organizations()
+		{
+			$sql='SELECT * FROM `organizations` ';
+			$row=array();
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+			$row=$stmt->fetchAll();
+			return $row;
+
+		}
+
+		public function organizationInfo($id)
+		{
+			$sql="SELECT * FROM `organizations` WHERE `id`='$id' ";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+			$row=$stmt->fetch();
+			return $row;
+		}
+		public function orgInfoEdit($id,$name,$location)
+		{
+			$sql="UPDATE `organizations` SET `name`='$name',`location`='$location' WHERE `id`='$id' ";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+		}
+
 
 
 

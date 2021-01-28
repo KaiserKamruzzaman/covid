@@ -94,10 +94,100 @@
 		echo "data updated successfully!!!!";
 	}
 
+	//business org portion
+
+	if(isset($_POST['org_add_modal']))
+	{
+		$output='
+			<div class="modal-header">
+				<h5 class="modal-title">Add Organization</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form id="org_add_form">
+				<div class="modal-body">
+					  <div class="form-group">
+					    <label >Org Name</label>
+					    <input type="text" class="form-control" name="org_name" placeholder="Enter Org Name" required>
+					  </div>  
+					  <div class="form-group">
+					    <label >Org Location</label>
+					    <input type="text" class="form-control" name="org_location" placeholder="Enter Org Location" required>
+					  </div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="add_org()">Save changes</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</form>
+		';
+
+		echo $output;
+	}
+
+	if(isset($_POST['org_name']))
+	{
+		$org_name=$_POST['org_name'];
+		$org_location=$_POST['org_location'];
+		$object->add_org($org_name,$org_location);
+
+	}
+
+	// org edited option
+	if(isset($_POST['org_id']))
+	{
+		$org_id=$_POST['org_id'];
+		$result=$object->organizationInfo($org_id);
+		$output=' 
+			<div class="modal-header">
+				<h5 class="modal-title">Edit '.$result['name'].' Info</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form id="org_info_edited">
+				<div class="modal-body">
+					<div class="form-group">
+						<label >Org Name</label>
+						<input type="text" class="form-control" name="org_name_edited" value="'.$result['name'].'">
+					</div>
+					 <div class="form-group">
+						<label >Org Location</label>
+						<input type="text" class="form-control" name="org_location_edited" value='.$result['location'].'>
+					</div> 
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="org_update('.$result['id'].')">Save changes</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</form>
+
+		 ';
+
+		 echo $output;
+
+	}
+	// org update portion
+	if(isset($_POST['org_name_edited']))
+	{
+		$org_id=$_POST['org_id'];
+		$name=$_POST['org_name_edited'];
+		$location=$_POST['org_location_edited'];
+		$object->orgInfoEdit($org_id,$name,$location);
+	}
+
+
+
 
 
 
 
 ?>
+
+
+
+
+
 
 

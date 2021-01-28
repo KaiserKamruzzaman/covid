@@ -38,6 +38,9 @@
  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
    <a class="navbar-brand" href="../index.php">Logo</a>
    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="index.php">Dashboard</a>
+      </li>
      <li class="nav-item">
        <a class="nav-link" href="business_org.php">Business Org</a>
      </li>
@@ -51,6 +54,7 @@
 
  <body>  
   <div class="container">
+    <!-- csv upload section -->
     <div class="row">
       <div class="col-md-12">
         <form method="post" enctype="multipart/form-data" action="adminApi.php">

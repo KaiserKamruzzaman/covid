@@ -6,14 +6,14 @@
 		 include'../assets/header.php';
 		 include "../controller/class.Crud.php";
 		 $object=new Crud();
-		 $result=$object->covidInfo();
+		 $result=$object->show_organizations();
 	 ?>
 </head>
 
 <!-- modal start -->
-<div class="modal" tabindex="-1" role="dialog" id="country_modal">
+<div class="modal" tabindex="-1" role="dialog" id="admin_modal">
   <div class="modal-dialog " role="document">
-    <div class="modal-content" id="country_modal_content">
+    <div class="modal-content" id="admin_modal_content">
     <!--   <div class="modal-header">
         <h5 class="modal-title">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -37,6 +37,9 @@
   <a class="navbar-brand" href="../index.php">Logo</a>
   <ul class="navbar-nav">
     <li class="nav-item">
+      <a class="nav-link" href="index.php">Dashboard</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="business_org.php">Business Org</a>
     </li>
     <li class="nav-item">
@@ -51,8 +54,37 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1>Hello from Business Organization.....</h1>
-				<button class="btn btn-success" id="add_org">Add Organization</button>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-success" id="add_org">Add Organization</button>
+        </div>
+        <hr>
+        <table id="example" class="display" style="width:100%">
+          <thead>
+            <tr>
+              <th>Organization Name</th>
+              <th>Organization Location</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+              $output='';
+              foreach ($result as $org) 
+              {
+                $output.='
+                  <tr>
+                    <td>'.$org['name'].'</td>
+                    <td>'.$org['location'].'</td>
+                    <td class="btn btn-sm btn-warning" onclick=org_edit('.$org['id'].')>Edit</td>
+                  </tr>
+                ';
+              }
+
+              echo $output;
+
+            ?>
+          </tbody>
+        </table>
 			</div>
 		</div>
 	</div>
@@ -60,7 +92,76 @@
 </html>
 
 <script type="text/javascript">
+
+  $(document).ready(function() {
+      $('#example').DataTable( {
+          dom: 'lBfrtip',
+          buttons: [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+          ]
+      } );
+  } );
+
 	$('#add_org').click(function(){
-		alert('hello');
+    var org_add_modal='org_add_modal';
+		$.ajax({
+      type:"POST",
+      url:"adminApi.php",
+      data:{org_add_modal:org_add_modal},
+      success:function(data)
+      {
+        $('#admin_modal').modal('show');
+        $('#admin_modal_content').html(data);
+
+      }
+    });
 	});
+
+  function add_org()
+  {
+    $.ajax({
+      type:"POST",
+      url:"adminApi.php",
+      data:$('#org_add_form').serialize(),
+      success:function(data)
+      {
+        alert("Data inserted successfully...");
+        location.reload();
+      }
+    });
+  }
+
+  function org_edit(id)
+  {
+    var org_id=id;
+    $.ajax({
+      type:"POST",
+      url:"adminApi.php",
+      data:{org_id:org_id},
+      success:function(data)
+      {
+        $('#admin_modal').modal('show');
+        $('#admin_modal_content').html(data);
+      }
+    });
+
+  }
+
+
+  function org_update(id)
+  {
+    var org_id=id;
+    $.ajax({
+      type:"POST",
+      url:"adminApi.php",
+      data:$('#org_info_edited').serialize()+"&org_id="+org_id,
+      success:function(data)
+      {
+        alert("Data Updated successfully...");
+        location.reload();
+      }
+    });
+  }
+
 </script>
+
