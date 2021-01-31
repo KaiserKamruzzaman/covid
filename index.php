@@ -1,9 +1,8 @@
 <?php
+	session_start();
 	include "controller/class.Crud.php";
 	$object=new Crud();
 	$result=$object->covidInfo();
-	// var_dump($result);
-
 
 ?>
 
@@ -72,9 +71,24 @@
   	<li class="nav-item">
   	  <a class="nav-link" href="business_org.php">Business Org</a>
   	</li>
-    <li class="nav-item">
-      <a class="nav-link" href="login/index.php">Login</a>
-    </li>
+  	<?php
+  		if(!isset($_SESSION["user_name"]))
+  		{
+  			echo '
+  				<li class="nav-item">
+  				  <a class="nav-link" href="login/index.php">Login</a>
+  				</li>
+  			 ';
+  		}
+  		else{
+  			echo ' 
+  				<li class="nav-item">
+  				  <a class="nav-link" href="login/logout.php">Logout</a>
+  				</li>
+  			 ';
+  		}
+  	?>
+
   </ul>
 </nav>
 <br><br><br>

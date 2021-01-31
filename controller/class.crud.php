@@ -94,7 +94,6 @@
 			$stmt->execute();
 			$row=$stmt->fetchAll();
 			return $row;
-
 		}
 
 		public function organizationInfo($id)

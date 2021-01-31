@@ -3,10 +3,12 @@
  <head>  
   <title></title>
   <?php
-     include'../assets/header.php';
-     include "../controller/class.Crud.php";
+    session_start();
+     include'assets/header.php';
+     include "controller/class.Crud.php";
      $object=new Crud();
-     $result=$object->covidInfo();
+     $result=$object->show_organizations();
+     // var_dump($result);
    ?>
 
  </head> 
@@ -37,17 +39,28 @@
 
  <!-- nabvar portion -->
  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-   <a class="navbar-brand" href="../index.php">Logo</a>
+   <a class="navbar-brand" href="index.php">Logo</a>
    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="index.php">Dashboard</a>
-      </li>
      <li class="nav-item">
        <a class="nav-link" href="business_org.php">Business Org</a>
      </li>
-     <li class="nav-item">
-       <a class="nav-link" href="../login/index.php">Login</a>
-     </li>
+     <?php
+      if(!isset($_SESSION["user_name"]))
+      {
+        echo '
+          <li class="nav-item">
+            <a class="nav-link" href="login/index.php">Login</a>
+          </li>
+         ';
+      }
+      else{
+        echo ' 
+          <li class="nav-item">
+            <a class="nav-link" href="login/logout.php">Logout</a>
+          </li>
+         ';
+      }
+     ?>
    </ul>
  </nav>
  <br><br><br>
@@ -58,6 +71,34 @@
 
     <div class="row">
       <div class="col-md-12">
+
+        <table id="example" class="display" style="width:100%">
+          <thead>
+            <tr>
+              <th>Org Name</th>
+              <th>Location</th>
+              <th>Rating</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+              $output='';
+              foreach ($result as $res) {
+                $output.=' 
+                  <tr>
+                    <td>'.$res['name'].'</td>
+                    <td>'.$res["location"].'</td>
+                    <td>4</td>
+                    <td><a href="view_org.php?id='.$res['id'].'" class="btn btn-sm btn-primary">View</a></td>
+                  </tr>
+                ';
+              }
+              echo $output;
+
+            ?>
+          </tbody>
+        </table>
 
       </div>
     </div>
@@ -70,5 +111,17 @@
 
 
 <script type="text/javascript">
- 
+ $(document).ready(function() {
+     $('#example').DataTable( {
+         dom: 'lBfrtip',
+         buttons: [
+             'copy', 'csv', 'excel', 'pdf', 'print'
+         ]
+     } );
+ } );
+
+
+
 </script>
+
+
