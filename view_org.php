@@ -9,6 +9,7 @@
      $object=new Crud();
      $user_id='';
      $org_id=$_GET['id'];
+     $org_comments=$object->view_comments($org_id);
      if(isset($_SESSION["user_name"]))
      {
       $user_id=$_SESSION["user_id"];
@@ -117,16 +118,33 @@
 
       <div class="col-md-8">
           <div class="d-flex flex-column comment-section">
-              <div class="bg-white p-2">
-                  <div class="d-flex flex-row user-info">
-                      <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                      <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Marry Andrews</span><span class="date text-black-50">Shared publicly - Jan 2020</span></div>
-                  </div>
-                  <div class="mt-2">
-                      <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                  </div>
-              </div>
+
               <?php
+
+                // view comments start
+                $comments_output='';
+                foreach ($org_comments as $comments) {
+                  $comment_owner=$object->comment_owner($comments['user_id']);
+                  $date=date_create($comments['inserted_at']);
+                  $date=date_format($date,"M d,Y");
+                  $comments_output.=' 
+                    <div class="bg-white p-2">
+                      <div class="d-flex flex-row user-info">
+                          <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                          <div class="d-flex flex-column justify-content-start ml-2">
+                            <span class="d-block font-weight-bold name">'.$comment_owner['name'].'</span>
+                            <span class="date text-black-50">Shared publicly - '.$date.'</span>
+                          </div>
+                      </div>
+                      <div class="mt-2">
+                          <p class="comment-text">'.$comments['comment'].'</p>
+                      </div>
+                    </div>
+                  ';
+                }
+                echo $comments_output;
+                // view comments end
+
                 if($user_id!='')
                 {
                   echo '
@@ -155,7 +173,35 @@
           </div>
       </div>
       <div class="col-md-4">
-        this is for ratings....
+        <div class="card">
+          <div class="card-header">Ratings</div>
+          <div class="card-body">
+            <?php
+              if($user_id!='')
+              {
+                echo '
+                  <div class="form-group">
+                      <label for="">Example select</label>
+                      <select class="form-control" id="org_ratings"                   onchange="ratings('.$user_id.','.$org_id.')">
+                        <option value="0">Select an Option</option>
+                        <option value="0.5">0.5</option>
+                        <option value="1">1</option>
+                        <option value="1.5">1.5</option>
+                        <option value="2">2</option>
+                        <option value="2.5">2.5</option>
+                        <option value="3">3</option>
+                        <option value="3.5">3.5</option>
+                        <option value="4">4</option>
+                      </select>
+                  </div> 
+                ';
+              }
+              else{
+                echo '<small class="text-danger">Please sign in first...</small>';
+              }
+            ?>
+
+        </div>
       </div>
 
     </div>
@@ -187,13 +233,31 @@
         data:{user_id:user_id,org_id:org_id,comment:comment},
         success:function(data)
         {
-
+          alert("comment inserted successfully....!!");
+          location.reload();
         }
       });
 
 
     }
 
+  }
+
+
+  function ratings(userId,orgId)
+  {
+    var ratings_user_id=userId;
+    var ratings_org_id=orgId;
+    var org_ratings=$('#org_ratings').val();
+    $.ajax({
+      type:"POST",
+      url:"api/organization_api.php",
+      data:{ratings_user_id:ratings_user_id,ratings_org_id:ratings_org_id,org_ratings:org_ratings},
+      success:function(data)
+      {
+
+      }
+    });
   }
 </script>
 

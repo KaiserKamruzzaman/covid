@@ -104,6 +104,7 @@
 			$row=$stmt->fetch();
 			return $row;
 		}
+		// edit organizations
 		public function orgInfoEdit($id,$name,$location)
 		{
 			$sql="UPDATE `organizations` SET `name`='$name',`location`='$location' WHERE `id`='$id' ";
@@ -111,7 +112,57 @@
 			$stmt->execute();
 		}
 
+		// comment section start
 
+		public function insert_comment($user_id,$org_id,$comment)
+		{
+			$sql="INSERT INTO `comments`(`user_id`, `org_id`, `comment`) VALUES('$user_id','$org_id','$comment')";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+		}
+
+		// view all commet of an org
+
+		public function view_comments($org_id)
+		{
+			$sql="SELECT * FROM `comments` WHERE `org_id`='$org_id' ORDER BY `inserted_at` DESC";
+			$row=array();
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+			$row=$stmt->fetchAll();
+			return $row;
+		}
+
+		// view comment ower
+		public function comment_owner($user_id)
+		{
+			$sql="SELECT * FROM `user` WHERE `id`='$user_id' ";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+			$row=$stmt->fetch();
+			return $row;
+		}
+
+		// give org_ratings
+		public function org_ratings($user_id,$org_id,$ratings)
+		{
+			$sql="SELECT * FROM `ratings` WHERE `user_id`='$user_id' ";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+			$user=$stmt->fetch();
+
+			if($user)
+			{
+				//update
+				echo 'user exits...';
+			}
+			else{
+				//insert
+				echo 'no user';
+			}
+			
+
+		}
 
 
 
