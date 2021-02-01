@@ -146,7 +146,7 @@
 		// give org_ratings
 		public function org_ratings($user_id,$org_id,$ratings)
 		{
-			$sql="SELECT * FROM `ratings` WHERE `user_id`='$user_id' ";
+			$sql="SELECT * FROM `ratings` WHERE `user_id`='$user_id' AND `org_id`='$org_id' ";
 			$stmt = $this->con->prepare($sql);
 			$stmt->execute();
 			$user=$stmt->fetch();
@@ -154,18 +154,36 @@
 			if($user)
 			{
 				//update
-				echo 'user exits...';
+				$sql="UPDATE `ratings` SET `rating`='$ratings' WHERE `user_id`='$user_id' AND `org_id`='$org_id' ";
+				$stmt = $this->con->prepare($sql);
+				$stmt->execute();
 			}
 			else{
 				//insert
-				echo 'no user';
+				$sql="INSERT INTO `ratings`(`user_id`, `org_id`, `rating`) VALUES('$user_id','$org_id','$ratings')";
+				$stmt = $this->con->prepare($sql);
+				$stmt->execute();
 			}
 			
-
 		}
 
+		//average rating
+		public function avg_rating($org_id)
+		{
+			$sql="SELECT AVG(`rating`) AS `avg_rating` FROM ratings WHERE `org_id`='$org_id' ";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+			$row=$stmt->fetch();
+			return $row;
+		}
 
-
+		//signup user
+		public function sign_up($name,$email,$pass,$country)
+		{
+			$sql="INSERT INTO `user`(`name`, `email`, `password`, `country`, `type`) VALUES('$name','$email','$pass','$country','2')";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+		}
 
 
 	}

@@ -255,7 +255,8 @@
       data:{ratings_user_id:ratings_user_id,ratings_org_id:ratings_org_id,org_ratings:org_ratings},
       success:function(data)
       {
-
+        alert("Your rating inserted successfully..!!");
+        // location.reload();
       }
     });
   }

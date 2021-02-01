@@ -34,6 +34,9 @@
       <div class="alert alert-danger" role="alert" id="login_error" style="display: none;">
         
       </div>
+      <div>
+        <span>Not Registered?? <a href="signup.php">Sign Up</a> Now!!!</span>
+      </div>
      
     </form>
 
