@@ -42,7 +42,7 @@
    <a class="navbar-brand" href="index.php">Logo</a>
    <ul class="navbar-nav">
      <li class="nav-item">
-       <a class="nav-link" href="business_org.php">Business Org</a>
+       <a class="nav-link" href="business_org.php">Medical Org</a>
      </li>
      <?php
       if(!isset($_SESSION["user_name"]))

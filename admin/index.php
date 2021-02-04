@@ -42,7 +42,7 @@
         <a class="nav-link" href="index.php">Dashboard</a>
       </li>
      <li class="nav-item">
-       <a class="nav-link" href="business_org.php">Business Org</a>
+       <a class="nav-link" href="business_org.php">Medical Org</a>
      </li>
      <li class="nav-item">
        <a class="nav-link" href="../login/index.php">Login</a>

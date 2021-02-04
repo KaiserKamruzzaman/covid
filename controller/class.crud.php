@@ -184,7 +184,31 @@
 			$stmt = $this->con->prepare($sql);
 			$stmt->execute();
 		}
+		//user profile
+		public function user_profile($user_id)
+		{
+			$sql="SELECT * FROM `user` WHERE `id`='$user_id' ";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+			$row=$stmt->fetch();
+			return $row;
+		}
 
+		public function user_update($user_id,$name,$email,$password,$country)
+		{
+			$sql="UPDATE `user` SET `name`='$name',`email`='$email',`password`='$password',`country`='$country' WHERE `id`='$user_id' ";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+		}
+
+		//organization delete portion
+
+		public function user_delete($org_id)
+		{
+			$sql="DELETE FROM `organizations` WHERE `id`='$org_id' ";
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+		}
 
 	}
 

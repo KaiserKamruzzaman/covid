@@ -40,7 +40,7 @@
       <a class="nav-link" href="index.php">Dashboard</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="business_org.php">Business Org</a>
+      <a class="nav-link" href="business_org.php">Medical Org</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="../login/index.php">Login</a>
@@ -55,7 +55,7 @@
 		<div class="row">
 			<div class="col-md-12">
         <div class="d-flex justify-content-end">
-          <button class="btn btn-success" id="add_org">Add Organization</button>
+          <button class="btn btn-success" id="add_org">Add Medical Org</button>
         </div>
         <hr>
         <table id="example" class="display" style="width:100%">
@@ -76,6 +76,7 @@
                     <td>'.$org['name'].'</td>
                     <td>'.$org['location'].'</td>
                     <td class="btn btn-sm btn-warning" onclick=org_edit('.$org['id'].')>Edit</td>
+                    <td class="btn btn-sm btn-danger ml-4" onclick=org_delete('.$org['id'].')>Delete</td>
                   </tr>
                 ';
               }
@@ -161,6 +162,28 @@
         location.reload();
       }
     });
+  }
+
+  function org_delete(org_id)
+  {
+    var org_id_delete=org_id;
+    var check = confirm("Are you sure!!!!");
+    if (check)
+    {
+
+      $.ajax({
+        type:"POST",
+        url:"adminApi.php",
+        data:{org_id_delete:org_id_delete},
+        success:function(data)
+        {
+          alert("Data deleted successfully...");
+          location.reload();
+        }
+      });
+
+    }
+    
   }
 
 </script>

@@ -87,7 +87,7 @@
    <a class="navbar-brand" href="index.php">Logo</a>
    <ul class="navbar-nav">
      <li class="nav-item">
-       <a class="nav-link" href="business_org.php">Business Org</a>
+       <a class="nav-link" href="business_org.php">Medical Org</a>
      </li>
     <?php
       if(!isset($_SESSION["user_name"]))
@@ -118,9 +118,8 @@
 
       <div class="col-md-8">
           <div class="d-flex flex-column comment-section">
-
+            <div style="max-height: 31rem;overflow-y: scroll;">
               <?php
-
                 // view comments start
                 $comments_output='';
                 foreach ($org_comments as $comments) {
@@ -143,6 +142,34 @@
                   ';
                 }
                 echo $comments_output;
+
+              ?>
+            </div>
+
+              <?php
+
+                // // view comments start
+                // $comments_output='';
+                // foreach ($org_comments as $comments) {
+                //   $comment_owner=$object->comment_owner($comments['user_id']);
+                //   $date=date_create($comments['inserted_at']);
+                //   $date=date_format($date,"M d,Y");
+                //   $comments_output.=' 
+                //     <div class="bg-white p-2">
+                //       <div class="d-flex flex-row user-info">
+                //           <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                //           <div class="d-flex flex-column justify-content-start ml-2">
+                //             <span class="d-block font-weight-bold name">'.$comment_owner['name'].'</span>
+                //             <span class="date text-black-50">Shared publicly - '.$date.'</span>
+                //           </div>
+                //       </div>
+                //       <div class="mt-2">
+                //           <p class="comment-text">'.$comments['comment'].'</p>
+                //       </div>
+                //     </div>
+                //   ';
+                // }
+                // echo $comments_output;
                 // view comments end
 
                 if($user_id!='')
@@ -161,10 +188,11 @@
                   ';
                 }
                 else{
-                  echo ' 
-                    <div class="bg-light p-2">
-                      <small class="text-danger">Please sign in first...</small>
-                    </div>
+                  echo '
+                    <br>
+                    <div class="alert alert-info">
+                      Please<a href="login/index.php"> Sign In</a> first to do a comment.
+                    </div> 
                   ';
                 }
               ?>
@@ -181,7 +209,6 @@
               {
                 echo '
                   <div class="form-group">
-                      <label for="">Example select</label>
                       <select class="form-control" id="org_ratings"                   onchange="ratings('.$user_id.','.$org_id.')">
                         <option value="0">Select an Option</option>
                         <option value="0.5">0.5</option>
@@ -197,7 +224,11 @@
                 ';
               }
               else{
-                echo '<small class="text-danger">Please sign in first...</small>';
+                echo '
+                  <div class="alert alert-info">
+                    Please<a href="login/index.php"> Sign In</a> first to give Rating.
+                  </div> 
+                ';
               }
             ?>
 

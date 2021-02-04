@@ -100,7 +100,7 @@
 	{
 		$output='
 			<div class="modal-header">
-				<h5 class="modal-title">Add Organization</h5>
+				<h5 class="modal-title">Add Medical Org</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				  <span aria-hidden="true">&times;</span>
 				</button>
@@ -109,15 +109,15 @@
 				<div class="modal-body">
 					  <div class="form-group">
 					    <label >Org Name</label>
-					    <input type="text" class="form-control" name="org_name" placeholder="Enter Org Name" required>
+					    <input type="text" class="form-control" name="org_name" placeholder="Medical Name" required>
 					  </div>  
 					  <div class="form-group">
 					    <label >Org Location</label>
-					    <input type="text" class="form-control" name="org_location" placeholder="Enter Org Location" required>
+					    <input type="text" class="form-control" name="org_location" placeholder="Medical Location" required>
 					  </div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" onclick="add_org()">Save changes</button>
+					<button type="button" class="btn btn-primary" onclick="add_org()">Add</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				</div>
 			</form>
@@ -175,6 +175,13 @@
 		$name=$_POST['org_name_edited'];
 		$location=$_POST['org_location_edited'];
 		$object->orgInfoEdit($org_id,$name,$location);
+	}
+
+	//org delete portion
+	if(isset($_POST['org_id_delete']))
+	{
+		$org_id=$_POST['org_id_delete'];
+		$object->user_delete($org_id);
 	}
 
 
