@@ -1,7 +1,13 @@
 <?php
 
   $date=date_create("2021-02-01 11:37:28");
-  echo date_format($date,"M d,Y");
+  // echo date_format($date,"M d,Y");
+
+
+  $date = new DateTime('now', new DateTimezone('Asia/Dhaka'));
+  echo $date->format('Y-m-d');
+
+
 
 ?>
 

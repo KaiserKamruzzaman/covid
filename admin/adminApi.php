@@ -3,12 +3,13 @@
 	$object=new Crud();
 
 
-	// csv file upload section
 	if(isset($_POST["submit"]))
 	{
 	 if($_FILES['file']['name'])
 	 {
-	  $filename = explode(".", $_FILES['file']['name']);
+
+	 	$date=$_POST['csv_date'];
+	  	$filename = explode(".", $_FILES['file']['name']);
 	  // var_dump($filename);
 	  if($filename[1] == 'csv')
 	  {
@@ -24,11 +25,14 @@
 	   fclose($handle);
 	   //array_shift($data);
 	   foreach($data as $d){
-	   		$object->uploadCsv($d);
+	   		$object->uploadCsv($d,$date);
 	   }
 	   header("Location: index.php"); 
 	   // echo "<script>alert('CSV file upload done...');</script>";
 	   exit();
+	  }
+	  else{
+	  	header("Location: index.php");
 	  }
 	 }
 	}

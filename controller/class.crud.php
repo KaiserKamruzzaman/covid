@@ -12,7 +12,8 @@
 			return $row;
 		}
 
-		public function uploadCsv($data)
+
+		public function uploadCsv($data,$pub_date)
 		{
 			$country=$data[0];
 			$total_case=$data[1];
@@ -20,15 +21,15 @@
 			$total_death=$data[3];
 			$new_death=$data[4];
 			$trans_type=$data[5];
-			$pub_date=$data[6];
-			$pub_date=date_create($pub_date);
-			$pub_date=date_format($pub_date,"Y-m-d");
+			// $pub_date=$data[6];
+			// $pub_date=date_create($pub_date);
+			// $pub_date=date_format($pub_date,"Y-m-d");
 
 			$sql = "INSERT INTO covid_data (country, total_case, new_case, total_death, new_death, trans_type,pub_date)
 			 		VALUES ('$country','$total_case','$new_case','$total_death','$new_death','$trans_type','$pub_date')";
 			$stmt = $this->con->prepare($sql);
 			$stmt->execute();
-	   		
+		  		
 		}
 
 		public function covidInfo()

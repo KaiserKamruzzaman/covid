@@ -56,16 +56,31 @@
   <div class="container">
     <!-- csv upload section -->
     <div class="row">
-      <div class="col-md-12">
-        <form method="post" enctype="multipart/form-data" action="adminApi.php">
-         <div align="center">  
-          <label>Select CSV File:</label>
-          <input type="file" name="file" />
-          <br />
-          <input type="submit" name="submit" value="Import" class="btn btn-info" />
-         </div>
-        </form>
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header text-center">
+            Upload CSV File..
+          </div>
+          <div class="card-body">
+            <form method="post" enctype="multipart/form-data" action="adminApi.php">
+             <div align="center">
+              <div class="form-group">
+                  <input type="text" class="form-control text-center" name="csv_date"
+                   value="<?php $date = new DateTime('now', new DateTimezone('Asia/Dhaka')); 
+                   echo $date->format('Y-m-d'); ?>"  readonly>
+              </div>  
+              <label>Select CSV File:</label>
+              <input type="file" name="file" />
+              <br />
+              <input type="submit"  name="submit" value="Import" class="btn btn-success" />
+             </div>
+            </form>
+          </div>
+        </div>
+        <br><br>
       </div>
+      <div class="col-md-3"></div>
     </div>
 
     <div class="row">
