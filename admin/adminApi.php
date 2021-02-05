@@ -3,38 +3,69 @@
 	$object=new Crud();
 
 
-	if(isset($_POST["submit"]))
+	// if(isset($_POST["submit"]))
+	// {
+	//  if($_FILES['file']['name'])
+	//  {
+
+	//  	$date=$_POST['csv_date'];
+	//   	$filename = explode(".", $_FILES['file']['name']);
+	//   // var_dump($filename);
+	//   if($filename[1] == 'csv')
+	//   {
+
+	//    $handle = fopen($_FILES['file']['tmp_name'], "r");
+	//    $i=0;
+	//    while($data_tmp = fgetcsv($handle,1000))
+	//    {
+	//    		$data[]=$data_tmp;
+	//    		// $object->uploadCsv($data);
+
+	//    }
+	//    fclose($handle);
+	//    //array_shift($data);
+	//    foreach($data as $d){
+	//    		$object->uploadCsv($d,$date);
+	//    }
+	//    header("Location: index.php"); 
+	//    // echo "<script>alert('CSV file upload done...');</script>";
+	//    exit();
+	//   }
+	//   else{
+	//   	header("Location: index.php");
+	//   }
+	//  }
+	// }
+
+	if(isset($_POST["csv_date"]))
 	{
-	 if($_FILES['file']['name'])
-	 {
+		$date=$_POST["csv_date"];
+		$duplicate_date=$object->date_duplication($date);
+		if($duplicate_date)
+		{
+			echo "1";
+			return 0;
+		}
+		else
+		{
+			$handle = fopen($_FILES['file']['tmp_name'], "r");
+			$i=0;
+			while($data_tmp = fgetcsv($handle,1000))
+			{
+				$data[]=$data_tmp;
+				// $object->uploadCsv($data);
+			}
+			fclose($handle);
+			//array_shift($data);
+			foreach($data as $d){
+				$object->uploadCsv($d,$date);
+			}
+		}
+		// $file_name=$_FILES['file']['name'];
+		// $file_location=$_FILES['file']['tmp_name'];
 
-	 	$date=$_POST['csv_date'];
-	  	$filename = explode(".", $_FILES['file']['name']);
-	  // var_dump($filename);
-	  if($filename[1] == 'csv')
-	  {
+		
 
-	   $handle = fopen($_FILES['file']['tmp_name'], "r");
-	   $i=0;
-	   while($data_tmp = fgetcsv($handle,1000))
-	   {
-	   		$data[]=$data_tmp;
-	   		// $object->uploadCsv($data);
-
-	   }
-	   fclose($handle);
-	   //array_shift($data);
-	   foreach($data as $d){
-	   		$object->uploadCsv($d,$date);
-	   }
-	   header("Location: index.php"); 
-	   // echo "<script>alert('CSV file upload done...');</script>";
-	   exit();
-	  }
-	  else{
-	  	header("Location: index.php");
-	  }
-	 }
 	}
 
 

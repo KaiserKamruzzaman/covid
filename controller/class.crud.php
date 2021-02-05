@@ -211,6 +211,18 @@
 			$stmt->execute();
 		}
 
+		//date duplication validation for homepage
+
+		public function date_duplication($date)
+		{
+			$sql="SELECT * FROM `covid_data` WHERE `pub_date`='$date' ";
+			$row=array();
+			$stmt = $this->con->prepare($sql);
+			$stmt->execute();
+			$row=$stmt->fetchAll();
+			return $row;
+		}
+
 	}
 
 

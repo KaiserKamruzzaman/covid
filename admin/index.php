@@ -55,7 +55,7 @@
  <body>  
   <div class="container">
     <!-- csv upload section -->
-    <div class="row">
+<!--     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
         <div class="card">
@@ -74,6 +74,34 @@
               <input type="file" name="file" />
               <br />
               <input type="submit"  name="submit" value="Import" class="btn btn-success" />
+             </div>
+            </form>
+          </div>
+        </div>
+        <br><br>
+      </div>
+      <div class="col-md-3"></div>
+    </div> -->
+
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header text-center">
+            Upload CSV File..
+          </div>
+          <div class="card-body">
+            <form id="csv_upload_form">
+             <div align="center">
+              <div class="form-group">
+                  <input type="text" id="csv_date" class="form-control text-center" name="csv_date"
+                   value="<?php $date = new DateTime('now', new DateTimezone('Asia/Dhaka')); 
+                   echo $date->format('Y-m-d'); ?>"  readonly>
+              </div>  
+              <label>Select CSV File:</label>
+              <input type="file" id="csv_file" name="file" />
+              <br />
+              <input type="submit"  name="submit" value="Import" class="btn btn-success"/>
              </div>
             </form>
           </div>
@@ -185,6 +213,74 @@
     });
   }
 
+  // csv_file upload section
+
+  // function upload_csv()
+  // {
+  //   var csv_date=$('#csv_date').val();
+  //   var csv_file_path=$('#csv_file').val();
+  //   var csv_file_name=$('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
+  //   var csv_file_name = csv_file_name.split(".");
+  
+  //   var form_data = new FormData($('#csv_upload_form').val());                  
+
+
+
+
+  //   if(csv_file_name[1]!='csv')
+  //   {
+  //     alert("Please Upload a CSV file..");
+  //   }
+  //   else{
+  //     $.ajax({
+  //       type:"POST",
+  //       url:"adminApi.php",
+  //       data:$('#csv_upload_form').serialize(),
+  //       success:function(data)
+  //       {
+                    
+  //       }
+  //     });
+  //   }
+  // }
+
+  //csv_file upload section........
+  $('#csv_upload_form').on('submit',function(e){
+
+    e.preventDefault();
+    var form_data = new FormData(this);
+    var csv_file_name=$('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
+    var csv_file_name = csv_file_name.split(".");
+
+    if(csv_file_name[1]!='csv')
+    {
+      alert("Please Upload a CSV file..");
+    }
+    else{
+
+      $.ajax({
+        type:"POST",
+        url:"adminApi.php",
+        data:form_data,
+        contentType: false,
+        processData: false,
+        success:function(data)
+        {
+          if(data=='1')
+          {
+            alert('Date already Exists...');
+          }
+          else
+          {
+            alert('File uploaded successfully...');
+            location.reload();
+          }
+        }
+      });
+
+    }
+
+  });
 
 
 

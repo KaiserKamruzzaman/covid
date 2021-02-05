@@ -1,17 +1,23 @@
 <?php
+ include'assets/header.php';
 
-  $date=date_create("2021-02-01 11:37:28");
-  // echo date_format($date,"M d,Y");
+ ?>
 
-
-  $date = new DateTime('now', new DateTimezone('Asia/Dhaka'));
-  echo $date->format('Y-m-d');
-
-
-
-?>
+<form method="post" id="sub_form">
+  <input type="file" name="file">
+  <input type="submit" name="summit">
+</form>
 
 
+
+<script type="text/javascript">
+  $('#sub_form').on('submit',function(e){
+    e.preventDefault();
+    var form_data = new FormData(this);
+    console.log(form_data);
+  });
+
+</script>
 
 
 
