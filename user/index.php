@@ -4,6 +4,10 @@
   <title></title>
   <?php
    session_start();
+   if(!isset($_SESSION["user_name"]))
+   {
+     header("Location: ../login/index.php");
+   }
    include'../assets/header.php';
    include "../controller/class.Crud.php";
    $object=new Crud();
@@ -95,7 +99,7 @@
  <body>  
   <div class="container">
     <div class="row">
-      <div class="col-md-3"></div>
+      <div class="col-md-1"></div>
       <div class="col-md-5">
 
         <div class="card">
@@ -133,7 +137,17 @@
         </div>
 
       </div>
-      <div class="col-md-4"></div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">Picture</div>
+          <div class="card-body">
+            <?php
+
+            ?>
+            <img src="<?php echo '../uploads/images/'.$user_info['image']; ?>" width="300px" height="257px" >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

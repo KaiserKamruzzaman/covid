@@ -1,23 +1,11 @@
 <?php
  include'assets/header.php';
-
+ echo "<script>alert('hello');</script>";
+ header('Location: index.php')
  ?>
 
-<form method="post" id="sub_form">
-  <input type="file" name="file">
-  <input type="submit" name="summit">
-</form>
 
 
-
-<script type="text/javascript">
-  $('#sub_form').on('submit',function(e){
-    e.preventDefault();
-    var form_data = new FormData(this);
-    console.log(form_data);
-  });
-
-</script>
 
 
 

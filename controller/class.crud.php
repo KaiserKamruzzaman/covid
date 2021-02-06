@@ -179,9 +179,9 @@
 		}
 
 		//signup user
-		public function sign_up($name,$email,$pass,$country)
+		public function sign_up($name,$email,$pass,$country,$image)
 		{
-			$sql="INSERT INTO `user`(`name`, `email`, `password`, `country`, `type`) VALUES('$name','$email','$pass','$country','2')";
+			$sql="INSERT INTO `user`(`name`, `email`, `password`, `country`,`image`, `type`) VALUES('$name','$email','$pass','$country','$image','2')";
 			$stmt = $this->con->prepare($sql);
 			$stmt->execute();
 		}

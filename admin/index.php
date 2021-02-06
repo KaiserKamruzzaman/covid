@@ -3,6 +3,11 @@
  <head>  
   <title></title>
   <?php
+   session_start();
+   if(!isset($_SESSION["user_name"]))
+   {
+     header("Location: ../login/index.php");
+   }
    include'../assets/header.php';
    include "../controller/class.Crud.php";
    $object=new Crud();
@@ -44,9 +49,23 @@
      <li class="nav-item">
        <a class="nav-link" href="business_org.php">Medical Org</a>
      </li>
-     <li class="nav-item">
-       <a class="nav-link" href="../login/index.php">Login</a>
-     </li>
+    <?php
+      if(!isset($_SESSION["user_name"]))
+      {
+        echo '
+          <li class="nav-item">
+            <a class="nav-link" href="../login/index.php">Login</a>
+          </li>
+         ';
+      }
+      else{
+        echo ' 
+          <li class="nav-item">
+            <a class="nav-link" href="../login/logout.php">Logout</a>
+          </li>
+         ';
+      }
+    ?>
    </ul>
  </nav>
  <br><br><br>

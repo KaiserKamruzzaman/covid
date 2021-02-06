@@ -1,3 +1,10 @@
+<?php
+  session_start();
+  session_destroy();
+  session_start();
+     
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +35,7 @@
           <div class="card-header text-center text-success">Register YourSelf Here!!</div>
           <div class="card-body">
             
-            <form method="post" action="signup_api.php">
+            <form method="post" action="signup_api.php" enctype="multipart/form-data">
               <div class="form-group">
                 <label>Name</label>
                 <input type="text" class="form-control" name="user_name" placeholder="Enter Name" required>
@@ -46,9 +53,20 @@
                 <label>Country</label>
                 <input type="text" class="form-control" name="user_country" placeholder="Enter Country" required>
               </div>
+              <div class="form-group">
+                 <label>Choose Picture</label>
+                 <input type="file" class="form-control-file" name="file" required>
+               </div>
               <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </form>
+            <?php
+              if(!empty($_SESSION['message'])) 
+              {
+                $message = $_SESSION['message'];
+                echo $message;
 
+              }
+            ?>
           </div>
         </div>
       </div>
