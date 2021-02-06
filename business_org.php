@@ -41,10 +41,34 @@
  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
    <a class="navbar-brand" href="index.php">Logo</a>
    <ul class="navbar-nav">
+      <?php
+        if(isset($_SESSION["user_name"]) && $_SESSION["user_type"]==1)
+        {
+          echo' 
+            <li class="nav-item">
+              <a class="nav-link" href="admin/index.php">Dashboard</a>
+            </li>
+           ';
+        }
+
+      ?>
      <li class="nav-item">
        <a class="nav-link" href="business_org.php">Medical Org</a>
      </li>
-     <?php
+
+   </ul>
+   <ul class="navbar-nav ml-auto">
+      
+    <?php
+      if(isset($_SESSION["user_name"]))
+      {
+        echo '
+           <span class="navbar-text mr-4">
+             <a href="user/index.php">Welcome, '.$_SESSION["user_name"].'</a>
+             
+           </span>
+        ';
+      }
       if(!isset($_SESSION["user_name"]))
       {
         echo '
@@ -60,7 +84,8 @@
           </li>
          ';
       }
-     ?>
+    ?>
+
    </ul>
  </nav>
  <br><br><br>

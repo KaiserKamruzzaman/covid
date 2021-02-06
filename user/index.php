@@ -72,9 +72,23 @@
    <a class="navbar-brand" href="../index.php">Logo</a>
    <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="index.php">Dashboard</a>
+        <a class="nav-link" href="../index.php">Home</a>
       </li>
+
+   </ul>
+
+   <ul class="navbar-nav ml-auto">
+      
     <?php
+      if(isset($_SESSION["user_name"]))
+      {
+        echo '
+           <span class="navbar-text mr-4">
+             <a href="../user/index.php">Welcome, '.$_SESSION["user_name"].'</a>
+             
+           </span>
+        ';
+      }
       if(!isset($_SESSION["user_name"]))
       {
         echo '
@@ -91,6 +105,7 @@
          ';
       }
     ?>
+
    </ul>
  </nav>
  <br><br><br>

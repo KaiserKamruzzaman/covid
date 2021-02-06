@@ -17,10 +17,35 @@
 <!-- nabvar portion -->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
   <a class="navbar-brand" href="../index.php">Logo</a>
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="index.php">Login</a>
-    </li>
+
+  <ul class="navbar-nav ml-auto">
+     
+   <?php
+     if(isset($_SESSION["user_name"]))
+     {
+       echo '
+          <span class="navbar-text mr-4">
+            Welcome, '.$_SESSION["user_name"].'
+          </span>
+       ';
+     }
+     if(!isset($_SESSION["user_name"]))
+     {
+       echo '
+         <li class="nav-item">
+           <a class="nav-link" href="index.php">Login</a>
+         </li>
+        ';
+     }
+     else{
+       echo ' 
+         <li class="nav-item">
+           <a class="nav-link" href="logout.php">Logout</a>
+         </li>
+        ';
+     }
+   ?>
+
   </ul>
 </nav>
 <br><br><br>

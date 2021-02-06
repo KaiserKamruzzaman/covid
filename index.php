@@ -68,26 +68,53 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
   <a class="navbar-brand" href="index.php">Logo</a>
   <ul class="navbar-nav">
+  	<?php
+  		if(isset($_SESSION["user_name"]))
+  		{
+  			if($_SESSION["user_type"]==1)
+  			{
+  				echo' 
+  					<li class="nav-item">
+  					  <a class="nav-link" href="admin/index.php">Dashboard</a>
+  					</li>
+  				 ';
+  			}
+  		
+  		}
+
+  	?>
   	<li class="nav-item">
   	  <a class="nav-link" href="business_org.php">Medical Org</a>
   	</li>
-  	<?php
-  		if(!isset($_SESSION["user_name"]))
-  		{
-  			echo '
-  				<li class="nav-item">
-  				  <a class="nav-link" href="login/index.php">Login</a>
-  				</li>
-  			 ';
-  		}
-  		else{
-  			echo ' 
-  				<li class="nav-item">
-  				  <a class="nav-link" href="login/logout.php">Logout</a>
-  				</li>
-  			 ';
-  		}
-  	?>
+  </ul>
+  <ul class="navbar-nav ml-auto">
+     
+   <?php
+	   if(isset($_SESSION["user_name"]))
+	   {
+	     echo '
+	        <span class="navbar-text mr-4">
+	          <a href="user/index.php">Welcome, '.$_SESSION["user_name"].'</a>
+	          
+	        </span>
+	     ';
+	   }
+     if(!isset($_SESSION["user_name"]))
+     {
+       echo '
+         <li class="nav-item">
+           <a class="nav-link" href="login/index.php">Login</a>
+         </li>
+        ';
+     }
+     else{
+       echo ' 
+         <li class="nav-item">
+           <a class="nav-link" href="login/logout.php">Logout</a>
+         </li>
+        ';
+     }
+   ?>
 
   </ul>
 </nav>
@@ -209,9 +236,21 @@
 		                'rgba(255, 206, 86, 0.2)',
 		                'rgba(75, 192, 192, 0.2)',
 		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)',
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
 		                'rgba(255, 159, 64, 0.2)'
 		            ],
 		            borderColor: [
+		                'rgba(255, 99, 132, 1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)',
 		                'rgba(255, 99, 132, 1)',
 		                'rgba(54, 162, 235, 1)',
 		                'rgba(255, 206, 86, 1)',
