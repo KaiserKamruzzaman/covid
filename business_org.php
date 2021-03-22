@@ -111,13 +111,19 @@
               $output='';
               foreach ($result as $res) {
                 $avg_rating=$object->avg_rating($res['id']);
+                $avg_rating=floatval($avg_rating['avg_rating']);
+                $avg_rating=number_format($avg_rating, 2);
+                // echo floatval($avg_rating);
+                // $avg_rating=floatval($avg_rating['avg_rating']);
+                // $avg_rating=number_format((float)$avg_rating['avg_rating'], 2);
                 // var_dump($avg_rating['avg_rating']);
+
                 // echo $avg_rating;
                 $output.=' 
                   <tr>
                     <td>'.$res['name'].'</td>
                     <td>'.$res["location"].'</td>
-                    <td>'.$avg_rating['avg_rating'].'</td>
+                    <td>'.$avg_rating.'</td>
                     <td><a href="view_org.php?id='.$res['id'].'" class="btn btn-sm btn-primary">View</a></td>
                   </tr>
                 ';

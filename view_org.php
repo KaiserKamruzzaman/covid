@@ -152,7 +152,7 @@
                   $comments_output.=' 
                     <div class="bg-white p-2">
                       <div class="d-flex flex-row user-info">
-                          <img class="rounded-circle" src="uploads/images/image.png" width="40">
+                          <img class="rounded-circle" src="uploads/images/'.$comment_owner['image'].'" width="40">
                           <div class="d-flex flex-column justify-content-start ml-2">
                             <span class="d-block font-weight-bold name">'.$comment_owner['name'].'</span>
                             <span class="date text-black-50">Shared publicly - '.$date.'</span>
@@ -197,10 +197,11 @@
 
                 if($user_id!='')
                 {
+                  $comment_owner=$object->comment_owner($user_id);
                   echo '
                     <div class="bg-light p-2">
                       <form id="comment_form">
-                        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="uploads/images/'.$comment_owner['image'].'" width="40">
                           <textarea id="user_comment" class="form-control ml-1 shadow-none textarea"></textarea>
                         </div>
                         <div class="mt-2 text-right">
@@ -242,6 +243,8 @@
                         <option value="3">3</option>
                         <option value="3.5">3.5</option>
                         <option value="4">4</option>
+                        <option value="4.5">4.5</option>
+                        <option value="5">5</option>
                       </select>
                   </div> 
                 ';
