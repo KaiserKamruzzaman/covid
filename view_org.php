@@ -108,7 +108,7 @@
       {
         echo '
            <span class="navbar-text mr-4">
-             Welcome, '.$_SESSION["user_name"].'
+             <a href="user/index.php">Welcome, '.$_SESSION["user_name"].'</a>
            </span>
         ';
       }

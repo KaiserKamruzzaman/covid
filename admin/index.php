@@ -8,6 +8,14 @@
    {
      header("Location: ../login/index.php");
    }
+   if(isset($_SESSION["user_name"]))
+   {
+     if($_SESSION["user_type"]==2)
+     {
+      header("Location: ../login/logout.php");
+     }
+     
+   }
    include'../assets/header.php';
    include "../controller/class.Crud.php";
    $object=new Crud();

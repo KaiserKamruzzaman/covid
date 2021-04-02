@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group">
                   <label>E-mail</label>
-                  <input type="email" class="form-control" value='.$user_info['email'].' name="email" required>
+                  <input type="email" class="form-control" value='.$user_info['email'].' name="email" required readonly>
                 </div>
                 <div class="form-group">
                   <label>Password</label>
